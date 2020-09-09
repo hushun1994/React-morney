@@ -62,7 +62,6 @@ const NumberPadSection = () => {
   const [output, setOutput] = useState("0");
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
-    console.log(text);
     if (text === null) {
       return;
     }
@@ -77,16 +76,36 @@ const NumberPadSection = () => {
       case "7":
       case "8":
       case "9":
-        if (text === "0") {
+        if (output.length > 16) {
+          return;
+        }
+        if (output === "0") {
           setOutput(text);
         } else {
           setOutput(output + text);
         }
         break;
-      case "删除":
-      case "清空":
       case ".":
+        if (output.length > 16) {
+          return;
+        }
+        if (output.indexOf(".") < 0) {
+          setOutput(output + text);
+        }
+        break;
+      case "删除":
+        if (output.length === 1) {
+          setOutput("0");
+        } else {
+          setOutput(output.slice(0, -1));
+        }
+        break;
+      case "清空":
+        setOutput("0");
+        break;
       case "ok":
+        console.log("ok");
+        break;
     }
   };
 
