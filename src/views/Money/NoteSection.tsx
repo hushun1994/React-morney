@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { resolve } from "dns";
-import { setTimeout } from "timers";
 
 const Wrapper = styled.section`
   background: #f5f5f5;
