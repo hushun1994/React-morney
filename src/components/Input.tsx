@@ -11,7 +11,7 @@ const Label = styled.label`
   > input {
     display: block;
     width: 100%;
-    height: 56px;
+    height: 44px;
     background: none;
     border: none;
   }
@@ -25,7 +25,7 @@ const Input: React.FC<Props> = (props) => {
   const { label, children, ...rest } = props;
   return (
     <Label>
-      <span>备注</span>
+      <span>{label}</span>
       <input {...rest} />
     </Label>
   );

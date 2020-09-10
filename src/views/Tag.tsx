@@ -5,9 +5,10 @@ import Layout from "components/Layout";
 import Icon from "components/Icon";
 import { Button } from "components/Button";
 import styled from "styled-components";
+import { Input } from "components/Input";
+import { Center } from "components/Center";
 
 const Topbar = styled.header`
-  /* border: 1px solid red; */
   background: #fff;
   display: flex;
   justify-content: space-between;
@@ -17,6 +18,12 @@ const Topbar = styled.header`
     width: 20px;
     height: 20px;
   }
+`;
+
+const InputWrapper = styled.div`
+  background: #fff;
+  padding: 0 16px;
+  margin-top: 8px;
 `;
 
 const Tag: React.FC = () => {
@@ -29,13 +36,12 @@ const Tag: React.FC = () => {
         <span>编辑标签</span>
         <span></span>
       </Topbar>
-      <div>
-        <label>
-          <span>标签名</span>
-          <input type="text" placeholder="标签名" />
-        </label>
-      </div>
-      <Button>删除标签</Button>
+      <InputWrapper>
+        <Input label="标签名" type="text" placeholder="标签名" />
+      </InputWrapper>
+      <Center>
+        <Button>删除标签</Button>
+      </Center>
     </Layout>
   );
 };
