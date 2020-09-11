@@ -1,5 +1,5 @@
 import React from "react";
-import { useTags } from "useTags";
+import { useTags } from "hooks/useTags";
 import { useParams, useHistory } from "react-router-dom";
 import Layout from "components/Layout";
 import Icon from "components/Icon";
@@ -34,13 +34,18 @@ const Tag: React.FC = () => {
   const onClickBack = () => {
     history.goBack();
   };
+  const deleteCurrentTag = (id: number) => {
+    deleteTag(id);
+    history.goBack();
+  };
   return (
     <Layout>
       <Topbar>
         <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
-        <span></span>
+        <Icon name="null" />
       </Topbar>
+
       {tag ? (
         <div>
           <InputWrapper>
@@ -55,7 +60,7 @@ const Tag: React.FC = () => {
             />
           </InputWrapper>
           <Center>
-            <Button onClick={() => deleteTag(tag.id)}>删除标签</Button>
+            <Button onClick={() => deleteCurrentTag(tag.id)}>删除标签</Button>
           </Center>
         </div>
       ) : (

@@ -36,9 +36,6 @@ const useTags = () => {
   };
   const addTag = () => {
     const tagName = window.prompt("请输入标签名");
-    // if (!tagName) {
-    //   return;
-    // }
     if (tagName !== null && tagName !== "") {
       setTags([...tags, { id: createId(), name: tagName }]);
     }
