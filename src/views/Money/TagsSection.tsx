@@ -1,17 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { useTags } from "hooks/useTags";
+import classnames from "classnames";
 
 const Wrapper = styled.section`
   background: #fff;
   padding: 12px 16px;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
   align-items: flex-start;
+  overflow: auto;
   > ol {
     margin: 0 -12px;
+    max-width: 100%;
     > li {
       background: #d9d9d9;
       border-radius: 18px;
@@ -19,6 +22,7 @@ const Wrapper = styled.section`
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
+      max-width: 40%;
       &.selected {
         background: #aaa;
       }
@@ -54,18 +58,18 @@ const TagsSection: React.FC<Props> = (props) => {
   };
   return (
     <Wrapper>
+      <button onClick={addTag}>新增标签</button>
       <ol>
         {tags.map((tag) => (
           <li
             key={tag.id}
             onClick={() => onToggleTag(tag.id)}
-            className={isSelected(tag.id)}
+            className={classnames(isSelected(tag.id), "oneLine")}
           >
             {tag.name}
           </li>
         ))}
       </ol>
-      <button onClick={addTag}>新增标签</button>
     </Wrapper>
   );
 };
