@@ -84,16 +84,18 @@ function Statistics() {
 
       {array.map(([date, records]) => {
         return (
-          <div>
+          <div key={date}>
             <Header>{showDate(date)}</Header>
 
             <div>
-              {records.map((r) => {
+              {records.map((r, index) => {
                 return (
-                  <Item>
+                  <Item key={index}>
                     <div className="tags oneLine">
                       {r.tagIds
-                        .map((tagId) => <span>{getName(tagId)}</span>)
+                        .map((tagId, index) => (
+                          <span key={index}>{getName(tagId)}</span>
+                        ))
                         .reduce((result, span, index) => {
                           return result.concat(
                             index < r.tagIds.length - 1 ? [span, "，"] : [span]

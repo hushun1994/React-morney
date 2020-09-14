@@ -1,6 +1,7 @@
 {
   "name": "react-morney",
   "version": "0.1.0",
+  "homepage": "https://hushun1994.github.io/morney-website/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
