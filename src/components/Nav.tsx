@@ -20,11 +20,12 @@ const NavWrapper = styled.nav`
         .icon {
           width: 24px;
           height: 24px;
+          fill: #565656;
         }
         &.selected {
-          color: salmon;
+          color: #fc5f20;
           .icon {
-            fill: salmon;
+            fill: #fc5f20;
           }
         }
       }

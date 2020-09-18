@@ -6,7 +6,7 @@ export type RecordItem = {
   note: string;
   category: "+" | "-";
   amount: number;
-  createdAt: string; // ISO 8601
+  createdAt: string;
 };
 
 type NewRecordItem = Omit<RecordItem, "createdAt">;
@@ -21,12 +21,12 @@ const useRecords = () => {
   }, records);
 
   const addRecord = (newRecord: NewRecordItem) => {
-    if (newRecord.amount <= 0) {
-      alert("请输入金额");
-      return false;
-    }
     if (newRecord.tagIds.length === 0) {
       alert("请选择标签");
+      return false;
+    }
+    if (newRecord.amount <= 0) {
+      alert("请输入金额");
       return false;
     }
     const record = { ...newRecord, createdAt: new Date().toISOString() };

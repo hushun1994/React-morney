@@ -16,15 +16,19 @@ const Wrapper = styled.section`
     margin: 0 -12px;
     max-width: 100%;
     > li {
-      background: #d9d9d9;
+      background: #888;
+      color: #fff;
       border-radius: 18px;
       display: inline-block;
-      padding: 3px 18px;
+      padding: 4px 18px;
       font-size: 14px;
       margin: 8px 12px;
       max-width: 40%;
       &.selected {
-        background: #aaa;
+        background: #fc5f20;
+      }
+      > span {
+        font-size: 14px;
       }
     }
   }
@@ -66,7 +70,7 @@ const TagsSection: React.FC<Props> = (props) => {
             onClick={() => onToggleTag(tag.id)}
             className={classnames(isSelected(tag.id), "oneLine")}
           >
-            {tag.name}
+            <span>{tag.name}</span>
           </li>
         ))}
       </ol>
