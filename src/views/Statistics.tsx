@@ -24,6 +24,11 @@ const Item = styled.div`
   }
 `;
 
+const ReplaceItem = styled.div`
+  padding: 32px;
+  text-align: center;
+`;
+
 const Header = styled.h3`
   font-size: 18px;
   line-height: 20px;
@@ -82,35 +87,41 @@ function Statistics() {
         />
       </CategoryWrapper>
 
-      {array.map(([date, records]) => {
-        return (
-          <div key={date}>
-            <Header>{showDate(date)}</Header>
+      {records.length === 0 ? (
+        <ReplaceItem>啥也没有看个球哦</ReplaceItem>
+      ) : (
+        array.map(([date, records]) => {
+          return (
+            <div key={date}>
+              <Header>{showDate(date)}</Header>
 
-            <div>
-              {records.map((r, index) => {
-                return (
-                  <Item key={index}>
-                    <div className="tags oneLine">
-                      {r.tagIds
-                        .map((tagId, index) => (
-                          <span key={index}>{getName(tagId)}</span>
-                        ))
-                        .reduce((result, span, index) => {
-                          return result.concat(
-                            index < r.tagIds.length - 1 ? [span, "，"] : [span]
-                          );
-                        }, [] as ReactNode[])}
-                    </div>
-                    {r.note && <div className="note">{r.note}</div>}
-                    <div>¥{r.amount}</div>
-                  </Item>
-                );
-              })}
+              <div>
+                {records.map((r, index) => {
+                  return (
+                    <Item key={index}>
+                      <div className="tags oneLine">
+                        {r.tagIds
+                          .map((tagId, index) => (
+                            <span key={index}>{getName(tagId)}</span>
+                          ))
+                          .reduce((result, span, index) => {
+                            return result.concat(
+                              index < r.tagIds.length - 1
+                                ? [span, "，"]
+                                : [span]
+                            );
+                          }, [] as ReactNode[])}
+                      </div>
+                      {r.note && <div className="note">{r.note}</div>}
+                      <div>¥{r.amount}</div>
+                    </Item>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </Layout>
   );
 }
