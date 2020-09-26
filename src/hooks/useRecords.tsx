@@ -13,6 +13,7 @@ type NewRecordItem = Omit<RecordItem, "createdAt">;
 
 const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
+  const [status, setStatus] = useState<Boolean>(false);
   useEffect(() => {
     setRecords(JSON.parse(window.localStorage.getItem("records") || "[]"));
   }, []);
@@ -21,6 +22,7 @@ const useRecords = () => {
   }, records);
 
   const addRecord = (newRecord: NewRecordItem) => {
+    setStatus(false);
     if (newRecord.tagIds.length === 0) {
       alert("请选择标签");
       return false;
@@ -34,7 +36,7 @@ const useRecords = () => {
     return true;
   };
 
-  return { records, addRecord };
+  return { records, addRecord, status, setStatus };
 };
 
 export { useRecords };

@@ -11,7 +11,7 @@ try {
 }
 
 type Props = {
-  name: string;
+  name?: string;
 } & React.SVGAttributes<SVGElement>;
 
 const Icon = (props: Props) => {

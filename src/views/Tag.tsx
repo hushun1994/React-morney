@@ -26,13 +26,19 @@ const InputWrapper = styled.div`
   margin-top: 8px;
 `;
 
+type Params = { id: string };
+
 const Tag: React.FC = () => {
-  const { findTag, updateTag, deleteTag } = useTags();
-  const { id } = useParams();
-  const tag = findTag(parseInt(id));
+  const { findTag, updateTag, deleteTag, updateTagError } = useTags();
+  const { id: idString } = useParams<Params>();
+  const tag = findTag(parseInt(idString));
   const history = useHistory();
   const onClickBack = () => {
-    history.goBack();
+    if (updateTagError) {
+      alert(updateTagError);
+    } else {
+      history.goBack();
+    }
   };
   const deleteCurrentTag = (id: number) => {
     deleteTag(id);
@@ -43,9 +49,8 @@ const Tag: React.FC = () => {
       <Topbar>
         <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
-        <Icon name="null" />
+        <Icon />
       </Topbar>
-
       {tag ? (
         <div>
           <InputWrapper>

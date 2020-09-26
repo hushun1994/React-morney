@@ -6,6 +6,7 @@ type tag = { id: number; name: string };
 
 const useTags = () => {
   const [tags, setTags] = useState<tag[]>([]);
+  const [updateTagError, setUpdateTagError] = useState<Error | null>(null);
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]");
     if (localTags.length === 0) {
@@ -36,11 +37,27 @@ const useTags = () => {
   };
   const addTag = () => {
     const tagName = window.prompt("请输入标签名");
-    if (tagName !== null && tagName !== "") {
-      setTags([...tags, { id: createId(), name: tagName }]);
+    if (tagName === null) {
+      return;
+    } else if (tagName === "") {
+      alert(new Error("标签名不能为空"));
+    } else {
+      const names = tags.map((tag) => tag.name);
+      if (names.indexOf(tagName) >= 0) {
+        alert(new Error("标签名重复了"));
+      } else {
+        setTags([...tags, { id: createId(), name: tagName }]);
+      }
     }
   };
   const updateTag = (id: number, { name }: { name: string }) => {
+    setUpdateTagError(null);
+    const names = tags.filter((tag) => tag.id !== id).map((tag) => tag.name);
+    if (names.indexOf(name) >= 0) {
+      setUpdateTagError(new Error("标签名重复了"));
+    } else if (name.length === 0) {
+      setUpdateTagError(new Error("标签名不能为空"));
+    }
     setTags(tags.map((tag) => (tag.id === id ? { id, name } : tag)));
   };
   const deleteTag = (id: number) => {
@@ -53,6 +70,7 @@ const useTags = () => {
   return {
     tags,
     setTags,
+    updateTagError,
     addTag,
     findTag,
     findTagIndex,

@@ -20,6 +20,11 @@ const Wrapper = styled.section`
         left: 0;
         bottom: 0;
       }
+      @media (max-height: 570px) {
+        & {
+          padding: 8px 0;
+        }
+      }
     }
   }
 `;

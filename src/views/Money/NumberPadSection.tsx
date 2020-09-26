@@ -10,7 +10,6 @@ type Props = {
 
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, setOutput] = useState(props.value.toString());
-
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {
@@ -19,6 +18,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === "ok") {
       if (props.onOk) {
         props.onOk();
+        setOutput("0");
       }
       return;
     }

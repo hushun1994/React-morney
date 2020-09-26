@@ -33,6 +33,8 @@ const Header = styled.h3`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 function Statistics() {
@@ -78,6 +80,15 @@ function Statistics() {
     }
   };
 
+  const showTotal = (records: RecordItem[]) => {
+    const amountArray = records.map((record) => {
+      return record.amount;
+    });
+    return amountArray.reduce((pre, cur) => {
+      return pre + cur;
+    });
+  };
+
   return (
     <Layout>
       <CategoryWrapper>
@@ -87,13 +98,15 @@ function Statistics() {
         />
       </CategoryWrapper>
 
-      {records.length === 0 ? (
+      {selectedRecords.length === 0 ? (
         <ReplaceItem>啥也没有看个球哦</ReplaceItem>
       ) : (
         array.map(([date, records]) => {
           return (
             <div key={date}>
-              <Header>{showDate(date)}</Header>
+              <Header>
+                {showDate(date)} <span>¥{showTotal(records)}</span>
+              </Header>
 
               <div>
                 {records.map((r, index) => {
